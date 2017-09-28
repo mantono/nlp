@@ -5,7 +5,7 @@ apply plugin: 'idea'
 
 group = 'com.mantono'
 version = '1.0-SNAPSHOT'
-description = 'description of project'
+description = 'A set of tools for text analysis and natural language processing'
 
 defaultTasks 'run'
 
@@ -36,6 +36,7 @@ dependencies {
     compile group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-jdk8', version: '0.17'
     compile group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-core', version: '0.17'
     testCompile 'org.junit.jupiter:junit-jupiter-api:5.0.0-M4'
+    testCompile "org.junit.platform:junit-platform-launcher:$junit_platform_version"
     testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.0.0-M4'
 }
 
