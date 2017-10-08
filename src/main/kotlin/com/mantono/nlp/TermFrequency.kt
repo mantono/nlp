@@ -1,8 +1,16 @@
 package com.mantono.nlp
 
+import java.io.File
+import java.nio.file.Files
+
 data class TermFrequency internal constructor(private val terms: Map<String, Int>): Map<String, Int> by terms
 {
     override fun get(key: String): Int = terms[key] ?: 0
+}
+
+fun termFrequency(file: File, tokenizer: TokenizerSetting = DefaultTokenizer): TermFrequency
+{
+    return termFrequency(Files.readAllLines(file.toPath()))
 }
 
 fun <T: CharSequence> termFrequency(input: Sequence<T>, tokenizer: TokenizerSetting = DefaultTokenizer): TermFrequency
@@ -18,12 +26,12 @@ fun <T: CharSequence> termFrequency(input: Sequence<T>, tokenizer: TokenizerSett
     return TermFrequency(map)
 }
 
-fun <T: CharSequence> termFrequency(input: T, tokenizer: TokenizerSetting = DefaultTokenizer): Map<String, Int>
+fun <T: CharSequence> termFrequency(input: T, tokenizer: TokenizerSetting = DefaultTokenizer): TermFrequency
 {
     return termFrequency(sequenceOf(input), tokenizer)
 }
 
-fun <T: CharSequence> termFrequency(input: Collection<T>, tokenizer: TokenizerSetting = DefaultTokenizer): Map<String, Int>
+fun <T: CharSequence> termFrequency(input: Collection<T>, tokenizer: TokenizerSetting = DefaultTokenizer): TermFrequency
 {
     return termFrequency(input.asSequence(), tokenizer)
 }
